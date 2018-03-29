@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="jiraassignee"/>
+  <!-- add our web resources -->
+  <web-resource key="jiraassignee-resources" name="jiraassignee Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="jiraassignee.css" location="/css/jiraassignee.css"/>
+    <resource type="download" name="jiraassignee.js" location="/js/jiraassignee.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>jiraassignee</context>
+  </web-resource>
+  <workflow-function key="set-assignee-post-function" name="Set Assignee Post Function" i18n-name-key="set-assignee-post-function.name" class="com.atlassian.jira.plugin.workflow.WorkflowNoInputPluginFactory">
+    <description key="set-assignee-post-function.description">The Set Assignee Post Function Plugin</description>
+    <function-class>com.sclerck.jira.workflow.SetAssigneePostFunction</function-class>
+    <resource type="velocity" name="view" location="templates/postfunctions/set-assignee-post-function.vm"/>
+  </workflow-function>
+</atlassian-plugin>
